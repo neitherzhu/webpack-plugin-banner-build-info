@@ -1,0 +1,1 @@
+# webpack-plugin-banner-build-info
