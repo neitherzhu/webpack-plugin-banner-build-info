@@ -24,7 +24,7 @@ class BannerBuildinfoWebpackPlugin {
           email = true,
           date = true,
           mixup = false
-        } = {} //this.options;
+        } = this.options
 
         let str = ''
         let branchStr = ''

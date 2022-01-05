@@ -1,6 +1,6 @@
 {
   "name": "webpack-plugin-banner-build-info",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "banner build info after build",
   "main": "index.js",
   "scripts": {
