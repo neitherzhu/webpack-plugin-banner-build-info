@@ -1,0 +1,20 @@
+{
+  "name": "webpack-plugin-banner-build-info",
+  "version": "1.0.3",
+  "description": "banner build info after build",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neitherzhu/webpack-plugin-banner-build-info.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neitherzhu/webpack-plugin-banner-build-info/issues"
+  },
+  "homepage": "https://github.com/neitherzhu/webpack-plugin-banner-build-info#readme"
+}
