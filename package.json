@@ -1,6 +1,6 @@
 {
   "name": "webpack-plugin-banner-build-info",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "banner build info after build",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/neitherzhu/webpack-plugin-banner-build-info/issues"
   },
-  "homepage": "https://github.com/neitherzhu/webpack-plugin-banner-build-info#readme"
+  "homepage": "https://github.com/neitherzhu/webpack-plugin-banner-build-info#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
 }

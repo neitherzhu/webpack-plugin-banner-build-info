@@ -1,4 +1,5 @@
 const fs = require('fs')
+const ec = require('./encypt')
 const execSync = require('child_process').execSync
 const pluginName = 'BannerBuildInfo'
 
@@ -9,6 +10,7 @@ function numberify (n) {
 const BRANCH_COMMAND = 'git rev-parse --abbrev-ref HEAD'
 const AUTHOR_COMMAND = 'git config --get user.name'
 const EMAIL_COMMAND = 'git config --get user.email'
+const COMMITID_COMMAND = 'git rev-parse --short HEAD'
 
 class BannerBuildinfoWebpackPlugin {
   constructor (options = {}) {
@@ -23,7 +25,8 @@ class BannerBuildinfoWebpackPlugin {
           author = true,
           email = true,
           date = true,
-          mixup = false
+          mixup = false,
+          commitId = true
         } = this.options
 
         let str = ''
@@ -31,10 +34,12 @@ class BannerBuildinfoWebpackPlugin {
         let authorStr = ''
         let emailStr = ''
         let dateStr = ''
+        let commitIdStr = ''
 
         branch && (branchStr = execSync(BRANCH_COMMAND).toString())
         author && (authorStr = execSync(AUTHOR_COMMAND).toString())
         email && (emailStr = execSync(EMAIL_COMMAND).toString())
+        commitId && (commitIdStr = execSync(COMMITID_COMMAND).toString())
         if (date) {
           if (mixup) {
             dateStr = Date.now().toString()
@@ -58,15 +63,18 @@ class BannerBuildinfoWebpackPlugin {
           { k: 'branch', v: branchStr },
           { k: 'author', v: authorStr },
           { k: 'email', v: emailStr },
-          { k: 'date', v: dateStr }
+          { k: 'date', v: dateStr },
+          { k: 'commitId', v: commitIdStr }
         ].filter(x => x.v)
 
         if (mixup) {
           str =
-            '  ' +
-            encodeURIComponent(
-              escape(arr.map(x => x.v.replace(/\n|\r/g, '')).join('$$'))
-            )
+            'console.log(' +
+            ec.Encrypt(
+              arr.map(x => x.v.replace(/\n|\r/g, '')).join('$$'),
+              pluginName
+            ) +
+            ')'
         } else {
           arr.forEach(x => {
             str += '  ' + x.k + ': ' + x.v
@@ -78,7 +86,7 @@ class BannerBuildinfoWebpackPlugin {
 ${str}
 */
 `
-        fs.writeFileSync(`${compiler.options.output.path}/version.txt`, str)
+        fs.writeFileSync(`${compiler.options.output.path}/iii.js`, str)
       } catch (e) {
         throw new Error(e)
       }
